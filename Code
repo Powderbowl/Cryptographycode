@@ -1,0 +1,313 @@
+import random
+mode = input("""Encryption .............. E
+                Decryption .............. D""")
+if mode == "E":
+    runnum = 0
+    encrypted_content = ""
+    encrypted_contentnum = 0
+    key = 0
+    fullkey = ''
+    thefullkey = ''
+
+    data = input("message ")
+    lower = input("advanced security? ")
+    data = data
+    data = data.lower()
+    if lower == "y":
+        data = data.replace(" ", "")
+    data = data.replace(". ", " ")
+    data = data.replace(", ", " ")
+    total = 0
+
+    for i in data:
+        total = total + 1
+    digits = total
+    print(f"""
+
+            """)
+    for i in range(digits):
+
+        random_key = random.randint(1, 25)
+
+        if random_key == 0:
+            random_key = "0" + str(random_key)
+        if random_key == 1:
+            random_key = "0" + str(random_key)
+        if random_key == 2:
+            random_key = "0" + str(random_key)
+        if random_key == 3:
+            random_key = "0" + str(random_key)
+        if random_key == 4:
+            random_key = "0" + str(random_key)
+        if random_key == 5:
+            random_key = "0" + str(random_key)
+        if random_key == 6:
+            random_key = "0" + str(random_key)
+        if random_key == 7:
+            random_key = "0" + str(random_key)
+        if random_key == 8:
+            random_key = "0" + str(random_key)
+        if random_key == 9:
+            random_key = "0" + str(random_key)
+
+        fullkey = fullkey + str(random_key)
+        thefullkey = thefullkey + str(f'"{random_key}",')
+
+        if data[runnum] == "a":
+            letternum = 0
+        elif data[runnum] == "b":
+            letternum = 1
+        elif data[runnum] == "c":
+            letternum = 2
+        elif data[runnum] == "d":
+            letternum = 3
+        elif data[runnum] == "e":
+            letternum = 4
+        elif data[runnum] == "f":
+            letternum = 5
+        elif data[runnum] == "g":
+            letternum = 6
+        elif data[runnum] == "h":
+            letternum = 7
+        elif data[runnum] == "i":
+            letternum = 8
+        elif data[runnum] == "j":
+            letternum = 9
+        elif data[runnum] == "k":
+            letternum = 10
+        elif data[runnum] == "l":
+            letternum = 11
+        elif data[runnum] == "m":
+            letternum = 12
+        elif data[runnum] == "n":
+            letternum = 13
+        elif data[runnum] == "o":
+            letternum = 14
+        elif data[runnum] == "p":
+            letternum = 15
+        elif data[runnum] == "q":
+            letternum = 16
+        elif data[runnum] == "r":
+            letternum = 17
+        elif data[runnum] == "s":
+            letternum = 18
+        elif data[runnum] == "t":
+            letternum = 19
+        elif data[runnum] == "u":
+            letternum = 20
+        elif data[runnum] == "v":
+            letternum = 21
+        elif data[runnum] == "w":
+            letternum = 22
+        elif data[runnum] == "x":
+            letternum = 23
+        elif data[runnum] == "y":
+            letternum = 24
+        elif data[runnum] == "z":
+            letternum = 25
+
+        encrypted_contentnum = letternum + int(random_key)
+        if encrypted_contentnum > 25:
+            encrypted_contentnum = encrypted_contentnum - 26
+
+        if encrypted_contentnum == 0:
+            encrypted_content = encrypted_content + "a"
+        elif encrypted_contentnum == 1:
+            encrypted_content = encrypted_content + "b"
+        elif encrypted_contentnum == 2:
+            encrypted_content = encrypted_content + "c"
+        elif encrypted_contentnum == 3:
+            encrypted_content = encrypted_content + "d"
+        elif encrypted_contentnum == 4:
+            encrypted_content = encrypted_content + "e"
+        elif encrypted_contentnum == 5:
+            encrypted_content = encrypted_content + "f"
+        elif encrypted_contentnum == 6:
+            encrypted_content = encrypted_content + "g"
+        elif encrypted_contentnum == 7:
+            encrypted_content = encrypted_content + "h"
+        elif encrypted_contentnum == 8:
+            encrypted_content = encrypted_content + "i"
+        elif encrypted_contentnum == 9:
+            encrypted_content = encrypted_content + "j"
+        elif encrypted_contentnum == 10:
+            encrypted_content = encrypted_content + "k"
+        elif encrypted_contentnum == 11:
+            encrypted_content = encrypted_content + "l"
+        elif encrypted_contentnum == 12:
+            encrypted_content = encrypted_content + "m"
+        elif encrypted_contentnum == 13:
+            encrypted_content = encrypted_content + "n"
+        elif encrypted_contentnum == 14:
+            encrypted_content = encrypted_content + "o"
+        elif encrypted_contentnum == 15:
+            encrypted_content = encrypted_content + "p"
+        elif encrypted_contentnum == 16:
+            encrypted_content = encrypted_content + "q"
+        elif encrypted_contentnum == 17:
+            encrypted_content = encrypted_content + "r"
+        elif encrypted_contentnum == 18:
+            encrypted_content = encrypted_content + "s"
+        elif encrypted_contentnum == 19:
+            encrypted_content = encrypted_content + "t"
+        elif encrypted_contentnum == 20:
+            encrypted_content = encrypted_content + "u"
+        elif encrypted_contentnum == 21:
+            encrypted_content = encrypted_content + "v"
+        elif encrypted_contentnum == 22:
+            encrypted_content = encrypted_content + "w"
+        elif encrypted_contentnum == 23:
+            encrypted_content = encrypted_content + "x"
+        elif encrypted_contentnum == 24:
+            encrypted_content = encrypted_content + "y"
+        elif encrypted_contentnum == 25:
+            encrypted_content = encrypted_content + "z"
+        runnum = runnum + 1
+        random_key = 0
+    print(f"Message: {data}")
+    print(f"Encryption message: {encrypted_content}")
+    print(f"Key: {fullkey}")
+    print(f"Number of Possibilities: {digits ** 26}")
+elif mode == "D":
+    runnum = 0
+    runnum2 = 0
+    encrypted_content = ""
+    encrypted_contentnum = 0
+    key = 0
+    random_key = 0
+    fullkey = ""
+    thefullkey = ""
+
+    data = input("Encryption message: ")
+    fullkey = input("Key: ")
+    total = 0
+
+    for i in data:
+        total = total + 1
+    digits = total
+    print(f"""
+            """)
+    for i in range(digits):
+
+        key = ""
+        key = fullkey[runnum2]
+        key = key + fullkey[runnum2 + 1]
+        if data[runnum] == "a":
+            letternum = 0
+        elif data[runnum] == "b":
+            letternum = 1
+        elif data[runnum] == "c":
+            letternum = 2
+        elif data[runnum] == "d":
+            letternum = 3
+        elif data[runnum] == "e":
+            letternum = 4
+        elif data[runnum] == "f":
+            letternum = 5
+        elif data[runnum] == "g":
+            letternum = 6
+        elif data[runnum] == "h":
+            letternum = 7
+        elif data[runnum] == "i":
+            letternum = 8
+        elif data[runnum] == "j":
+            letternum = 9
+        elif data[runnum] == "k":
+            letternum = 10
+        elif data[runnum] == "l":
+            letternum = 11
+        elif data[runnum] == "m":
+            letternum = 12
+        elif data[runnum] == "n":
+            letternum = 13
+        elif data[runnum] == "o":
+            letternum = 14
+        elif data[runnum] == "p":
+            letternum = 15
+        elif data[runnum] == "q":
+            letternum = 16
+        elif data[runnum] == "r":
+            letternum = 17
+        elif data[runnum] == "s":
+            letternum = 18
+        elif data[runnum] == "t":
+            letternum = 19
+        elif data[runnum] == "u":
+            letternum = 20
+        elif data[runnum] == "v":
+            letternum = 21
+        elif data[runnum] == "w":
+            letternum = 22
+        elif data[runnum] == "x":
+            letternum = 23
+        elif data[runnum] == "y":
+            letternum = 24
+        elif data[runnum] == "z":
+            letternum = 25
+
+        encrypted_contentnum = letternum - int(key)
+        if encrypted_contentnum > 25:
+            encrypted_contentnum = encrypted_contentnum - 26
+        if encrypted_contentnum < 0:
+            encrypted_contentnum = (encrypted_contentnum + 1) + 25
+
+        if encrypted_contentnum == 0:
+            encrypted_content = encrypted_content + "a"
+        elif encrypted_contentnum == 1:
+            encrypted_content = encrypted_content + "b"
+        elif encrypted_contentnum == 2:
+            encrypted_content = encrypted_content + "c"
+        elif encrypted_contentnum == 3:
+            encrypted_content = encrypted_content + "d"
+        elif encrypted_contentnum == 4:
+            encrypted_content = encrypted_content + "e"
+        elif encrypted_contentnum == 5:
+            encrypted_content = encrypted_content + "f"
+        elif encrypted_contentnum == 6:
+            encrypted_content = encrypted_content + "g"
+        elif encrypted_contentnum == 7:
+            encrypted_content = encrypted_content + "h"
+        elif encrypted_contentnum == 8:
+            encrypted_content = encrypted_content + "i"
+        elif encrypted_contentnum == 9:
+            encrypted_content = encrypted_content + "j"
+        elif encrypted_contentnum == 10:
+            encrypted_content = encrypted_content + "k"
+        elif encrypted_contentnum == 11:
+            encrypted_content = encrypted_content + "l"
+        elif encrypted_contentnum == 12:
+            encrypted_content = encrypted_content + "m"
+        elif encrypted_contentnum == 13:
+            encrypted_content = encrypted_content + "n"
+        elif encrypted_contentnum == 14:
+            encrypted_content = encrypted_content + "o"
+        elif encrypted_contentnum == 15:
+            encrypted_content = encrypted_content + "p"
+        elif encrypted_contentnum == 16:
+            encrypted_content = encrypted_content + "q"
+        elif encrypted_contentnum == 17:
+            encrypted_content = encrypted_content + "r"
+        elif encrypted_contentnum == 18:
+            encrypted_content = encrypted_content + "s"
+        elif encrypted_contentnum == 19:
+            encrypted_content = encrypted_content + "t"
+        elif encrypted_contentnum == 20:
+            encrypted_content = encrypted_content + "u"
+        elif encrypted_contentnum == 21:
+            encrypted_content = encrypted_content + "v"
+        elif encrypted_contentnum == 22:
+            encrypted_content = encrypted_content + "w"
+        elif encrypted_contentnum == 23:
+            encrypted_content = encrypted_content + "x"
+        elif encrypted_contentnum == 24:
+            encrypted_content = encrypted_content + "y"
+        elif encrypted_contentnum == 25:
+            encrypted_content = encrypted_content + "z"
+        runnum = runnum + 1
+        runnum2 = runnum2 + 2
+        random_key = 0
+    print(f"Encryption message: {data}")
+    print(f"message: {encrypted_content}")
+    print(f"Key: {fullkey}")
+    print(thefullkey)
+    print(f"Number of Possibilities with Encryption message: {digits ** 26}")
