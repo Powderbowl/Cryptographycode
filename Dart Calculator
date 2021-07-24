@@ -1,0 +1,74 @@
+import time
+print('hello world')
+time.sleep(1)
+print(" ")
+time.sleep(1)
+print(" ")
+time.sleep(1)
+print(" ")
+time.sleep(1)
+print("Pizza Industries")
+time.sleep(1)
+print("Dart Calculator")
+time.sleep(1)
+print('1.1.3')
+time.sleep(1)
+print(" ")
+time.sleep(1)
+print("1 = yes and 2 = no")
+time.sleep(1)
+print(" ")
+time.sleep(1)
+mode = float(input("Start? "))
+
+
+if mode == 1:
+    start = input("What is the starting score? ")
+    player_1 = input("Who is player #1? ")
+    player_2 = input("Who is player #2? ")
+    player_1_score = int(start)
+    player_2_score = int(start)
+
+    while player_2_score or player_1_score > 0:
+        player_1_Dart_1 = int(input(f"Where did {player_1}'s first dart land? "))
+        player_1_Multiple_1 = int(input(f"What is {player_1}'s first dart's multiple? "))
+        player_1_Dart_2 = int(input(f"Where did {player_1}'s second dart land? "))
+        player_1_Multiple_2 = int(input(f"What is {player_1}'s second dart's multiple? "))
+        player_1_Dart_3 = int(input(f"Where did {player_1}'s third dart land? "))
+        player_1_Multiple_3 = int(input(f"What is {player_1}'s third dart's multiple? "))
+        player_1_score_difference = (((player_1_Dart_1 * player_1_Multiple_1)+(player_1_Dart_2*player_1_Multiple_2)+(player_1_Dart_3*player_1_Multiple_3)))
+        player_1_score = player_1_score - player_1_score_difference
+        print(f"{player_1}'s score is {player_1_score}")
+        if player_1_score == 0:
+            print(f"Game Over, {player_1} won!")
+            break
+        elif player_1_score < 0:
+            player_1_score = player_1_score + player_1_score_difference
+
+        player_2_Dart_1 = int(input(f"Where did {player_2}'s first dart land? "))
+        player_2_Multiple_1 = int(input(f"What is {player_2}'s first dart's multiple? "))
+        player_2_Dart_2 = int(input(f"Where did {player_2}'s second dart land? "))
+        player_2_Multiple_2 = int(input(f"What is {player_2}'s second dart's multiple? "))
+        player_2_Dart_3 = int(input(f"Where did {player_2}'s third dart land? "))
+        player_2_Multiple_3 = int(input(f"What is {player_2}'s third dart's multiple? "))
+        player_2_score_difference = (((player_2_Dart_1 * player_2_Multiple_1)+(player_2_Dart_2*player_2_Multiple_2)+(player_2_Dart_3*player_2_Multiple_3)))
+        player_2_score = player_2_score-player_2_score_difference
+        print(f"{player_2}'s score is {player_2_score}")
+
+        if player_2_score == 0:
+            print(f"Game Over, {player_2} won!")
+            break
+        elif player_2_score < 0:
+            player_2_score = player_2_score + player_2_score_difference
+
+            print(f"""
+                {player_1}|{player_1_score}
+                ---------------------------
+                {player_2}|{player_2_score}
+                """)
+
+elif mode == 2:
+    print("Failure to start.")
+
+else:
+    print("Failure to start.")
