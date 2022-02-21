@@ -1,0 +1,113 @@
+import os
+import random
+word1 = ["anthropology", "misanthrope", "philanthropy "]
+word2 = ["creed", "credo", "credence", "credit", "credulous", "incredulous", "incredible "]
+word3 = ["dominate", "dominion", "predominant", "domain "]
+word4 = ["matrimony", "maternal", "matriarchate", "matron"]
+word5 = ["porter", "portable", "transport", "report", "export", "import", "support", "transportation"]
+
+root1 = "anthrop"
+root2 = "cred"
+root3 = "domin"
+root4 = "matri"
+root5 = "port"
+
+meaning1 = "man"
+meaning2 = "believe"
+meaning3 = "master"
+meaning4 = "mother"
+meaning5 = "carry"
+
+numword1 = 3
+numword2 = 7
+numword3 = 4
+numword4 = 4
+numword5 = 8
+
+random1 = random.randrange(0, numword1)
+random2 = random.randrange(0, numword2)
+random3 = random.randrange(0, numword3)
+random4 = random.randrange(0, numword4)
+random5 = random.randrange(0, numword5)
+
+os.system(f"say '{word1[random1]}'")
+awnser1 = input("Word? ")
+rootawnser1 = input("Root? ")
+meaningawnser1 = input("Meaning? ")
+
+os.system(f"say '{word2[random2]}'")
+awnser2 = input("Word? ")
+rootawnser2 = input("Root? ")
+meaningawnser2 = input("Meaning? ")
+
+os.system(f"say '{word3[random3]}'")
+awnser3 = input("Word? ")
+rootawnser3 = input("Root? ")
+meaningawnser3 = input("Meaning? ")
+
+os.system(f"say '{word4[random4]}'")
+awnser4 = input("Word? ")
+rootawnser4 = input("Root? ")
+meaningawnser4 = input("Meaning? ")
+
+os.system(f"say '{word5[random5]}'")
+awnser5 = input("Word? ")
+rootawnser5 = input("Root? ")
+meaningawnser5 = input("Meaning? ")
+
+correct = [word1[random1], word2[random2], word3[random3], word4[random4], word5[random5], root1, root2, root3, root4,root5, meaning1, meaning2, meaning3, meaning4, meaning5]
+testing = [awnser1, awnser2, awnser3, awnser4, awnser5, rootawnser1, rootawnser2, rootawnser3, rootawnser4, rootawnser5,meaningawnser1, meaningawnser2, meaningawnser3, meaningawnser4, meaningawnser5]
+def similar(word1, word2):
+    word1 = word1.lower()
+    word2 = word2.lower()
+    if word1 == word2:
+        return 1
+    else:
+        return 0
+
+score = 0
+for i in range(15):
+    score = score + similar(correct[i], testing[i])
+
+print(f"{score}/15")
+print(f"{score/15*100}%")
+
+print(f"""
+-----------------------------------------
+{word1[random1]} | {awnser1}
+-----------------------------------------
+{word2[random2]} | {awnser2}
+-----------------------------------------
+{word3[random3]} | {awnser3}
+-----------------------------------------
+{word4[random4]} | {awnser4}
+-----------------------------------------
+{word5[random5]} | {awnser5}
+-----------------------------------------
+
+
+-----------------------------------------
+{root1} | {rootawnser1}
+-----------------------------------------
+{root2} | {rootawnser2}
+-----------------------------------------
+{root3} | {rootawnser3}
+-----------------------------------------
+{root4} | {rootawnser4}
+-----------------------------------------
+{root5} | {rootawnser5}
+-----------------------------------------
+
+
+-----------------------------------------
+{meaning1} | {meaningawnser1}
+-----------------------------------------
+{meaning2} | {meaningawnser2}
+-----------------------------------------
+{meaning3} | {meaningawnser3}
+-----------------------------------------
+{meaning4} | {meaningawnser4}
+-----------------------------------------
+{meaning5} | {meaningawnser5}
+-----------------------------------------
+""")
