@@ -1,0 +1,164 @@
+import math
+
+print("""
+  ____                 _           _ _   _____ _ _       _     _     ____  _                 _       _             
+ | __ )  __ _ ___  ___| |__   __ _| | | |  ___| (_) __ _| |__ | |_  / ___|(_)_ __ ___  _   _| | __ _| |_ ___  _ __ 
+ |  _ \ / _` / __|/ _ \ '_ \ / _` | | | | |_  | | |/ _` | '_ \| __| \___ \| | '_ ` _ \| | | | |/ _` | __/ _ \| '__|
+ | |_) | (_| \__ \  __/ |_) | (_| | | | |  _| | | | (_| | | | | |_   ___) | | | | | | | |_| | | (_| | || (_) | |   
+ |____/ \__,_|___/\___|_.__/ \__,_|_|_| |_|   |_|_|\__, |_| |_|\__| |____/|_|_| |_| |_|\__,_|_|\__,_|\__\___/|_|   
+                                                   |___/                                                           """)
+
+print("Created By Pizza Industries")
+
+start_sequence = input("""
+Basic Simulator ....... 1
+Elevation Simulator ... 2
+Chart Creator ......... 3
+
+* All simulators incorporate drag
+Ralston Valley High School Field is at 5640 ft
+""")
+
+if start_sequence == "1":
+    # Define variables
+    exit_velocity = float(input("Enter the exit velocity of the baseball in mph: "))
+    launch_angle = float(input("Enter the launch angle of the baseball in degrees: "))
+
+    # Convert units
+    exit_velocity_fps = exit_velocity * 1.4667  # Convert mph to feet per second
+    launch_angle_rad = math.radians(launch_angle)  # Convert degrees to radians
+    ball_mass = 0.14593  # Mass of a baseball in kg
+    drag_coefficient = 0.3  # Drag coefficient of a baseball
+    rho = 1.225  # Density of air at STP in kg/m^3
+    g = 9.81  # Acceleration due to gravity in m/s^2
+
+    # Calculate distance
+    v0x = exit_velocity_fps * math.cos(launch_angle_rad)
+    v0y = exit_velocity_fps * math.sin(launch_angle_rad)
+    t = 0
+    dt = 0.01
+    x = 0
+    y = 0
+
+    while y >= 0:
+        # Calculate acceleration due to drag
+        v = math.sqrt(v0x ** 2 + v0y ** 2)
+        ax = -drag_coefficient * rho * v * v0x * math.pi * 0.0366 ** 2 / (2 * ball_mass)
+        ay = -drag_coefficient * rho * v * v0y * math.pi * 0.0366 ** 2 / (2 * ball_mass) - g
+
+        # Update position and velocity
+        x += v0x * dt
+        y += v0y * dt
+        v0x += ax * dt
+        v0y += ay * dt
+        t += dt
+
+    distance = x
+
+    # Print result
+    print("The baseball will travel approximately %.2f feet with drag." % distance)
+elif start_sequence == "2":
+    # Define variables
+    exit_velocity = float(input("Enter the exit velocity of the baseball in mph: "))
+    launch_angle = float(input("Enter the launch angle of the baseball in degrees: "))
+    elevation = float(input("Enter the elevation of the field in ft: "))
+    elevation = elevation/3.281
+    temperature = int(input("Enter the temperature of the field in °F: "))
+    temperature = (temperature-32)*(5/9)+273.15
+    # Finding the air pressure at elevation, Equation 2 @ https://www.mide.com/air-pressure-at-altitude-calculator
+    P_2 = (101325*(1+(-0.0065/288.15)*elevation))**(-9.80665*.0289644/8.31432*-0.0065)
+
+    # Calculating air density based on pressure (kg/m^3)
+    rho = P_2/287.0500676*temperature
+    # Convert units
+    exit_velocity_fps = exit_velocity * 1.4667  # Convert mph to feet per second
+    launch_angle_rad = math.radians(launch_angle)  # Convert degrees to radians
+    ball_mass = 0.14593  # Mass of a baseball in kg
+    drag_coefficient = 0.3  # Drag coefficient of a baseball
+
+    g = 9.81  # Acceleration due to gravity in m/s^2
+
+    # Calculate distance
+    v0x = exit_velocity_fps * math.cos(launch_angle_rad)
+    v0y = exit_velocity_fps * math.sin(launch_angle_rad)
+    t = 0
+    dt = 0.01
+    x = 0
+    y = 0
+
+    while y >= 0:
+        # Calculate acceleration due to drag
+        v = math.sqrt(v0x ** 2 + v0y ** 2)
+        ax = -drag_coefficient * rho * v * v0x * math.pi * 0.0366 ** 2 / (2 * ball_mass)
+        ay = -drag_coefficient * rho * v * v0y * math.pi * 0.0366 ** 2 / (2 * ball_mass) - g
+
+        # Update position and velocity
+        x += v0x * dt
+        y += v0y * dt
+        v0x += ax * dt
+        v0y += ay * dt
+        t += dt
+
+    distance = x
+
+    # Print result
+    print(f"The baseball will travel approximately {distance} feet with drag at {elevation*3.281} ft when the air density is {rho}." )
+
+elif start_sequence == "3":
+    # Define variables
+    start_exitvelo = int(input("Enter the first exit velocity column: "))
+    end_exitvelo = int(input("Enter the last exit velocity column: "))
+    exit_velo_increment = int(input("Enter the exit velocity increment size: "))
+    start_angle = int(input("Enter the first launch angle row: "))
+    end_angle = int(input("Enter the last launch angle row: "))
+    launch_angle_increment = int(input("Enter the launch angle increment size: "))
+    elevation = float(input("Enter the elevation of the field in ft: "))
+    elevation = elevation / 3.281
+    temperature = int(input("Enter the temperature of the field in °F: "))
+    temperature = (temperature - 32) * (5 / 9) + 273.15
+
+    P_2 = (101325 * (1 + (-0.0065 / 288.15) * elevation)) ** (-9.80665 * .0289644 / 8.31432 * -0.0065)
+
+    # Calculating air density based on pressure (kg/m^3)
+    rho = P_2 / 287.0500676 * temperature
+
+    data = [[] for i in range(int((end_angle-start_angle)/launch_angle_increment)+1)]
+
+    for i in range(int((end_angle-start_angle)/launch_angle_increment)+1):
+        launch_angle = start_angle + launch_angle_increment * i
+        for j in range(int((end_exitvelo-start_exitvelo)/exit_velo_increment)+1):
+            exit_velocity = start_exitvelo + exit_velo_increment * j
+            # Convert units
+            exit_velocity_fps = exit_velocity * 1.4667  # Convert mph to feet per second
+            launch_angle_rad = math.radians(launch_angle)  # Convert degrees to radians
+            ball_mass = 0.14593  # Mass of a baseball in kg
+            drag_coefficient = 0.3  # Drag coefficient of a baseball
+
+            g = 9.81  # Acceleration due to gravity in m/s^2
+
+            # Calculate distance
+            v0x = exit_velocity_fps * math.cos(launch_angle_rad)
+            v0y = exit_velocity_fps * math.sin(launch_angle_rad)
+            t = 0
+            dt = 0.01
+            x = 0
+            y = 0
+
+            while y >= 0:
+                # Calculate acceleration due to drag
+                v = math.sqrt(v0x ** 2 + v0y ** 2)
+                ax = -drag_coefficient * rho * v * v0x * math.pi * 0.0366 ** 2 / (2 * ball_mass)
+                ay = -drag_coefficient * rho * v * v0y * math.pi * 0.0366 ** 2 / (2 * ball_mass) - g
+
+                # Update position and velocity
+                x += v0x * dt
+                y += v0y * dt
+                v0x += ax * dt
+                v0y += ay * dt
+                t += dt
+
+            distance = x
+            data[i].append(distance)
+
+    for k in range(int((end_angle-start_angle)/launch_angle_increment)):
+        print(data[k])
