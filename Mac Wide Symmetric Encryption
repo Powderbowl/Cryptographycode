@@ -1,0 +1,54 @@
+import os
+
+
+files = []
+directories = []
+path = "/volumes/"
+
+findinguser = os.listdir(path)
+findinguser.remove('Macintosh HD')
+print(f"Users: {findinguser}")
+for a in findinguser:
+
+    path = f"/volumes/{a}/Vault/"
+    thepath = path
+    for file in os.listdir(path):
+            filepath = path + "/" + file
+            if file == ".Trashes":
+                print(f"File is ignored: {file}")
+            elif file == "System Volume Information":
+                print(f"File is ignored: {file}")
+            elif file == "PycharmProjects":
+                print(f"File is ignored: {file}")
+            elif file == ".Spotlight-V100":
+                print(f"File is ignored: {file}")
+            elif os.path.isfile(filepath):
+                files.append(file)
+                print(f"This is a file: {file}")
+            elif os.path.isdir(filepath):
+                directories.append(file)
+                print(f"This is a Directory: {file}")
+            else:
+                print(f"Could not encrypt {filepath}")
+
+    print(directories)
+    print(" \n \n \n")
+
+    for i in directories:
+        directorypath = thepath + "/" + i
+        print(directorypath)
+        print(os.listdir(directorypath))
+        for items in os.listdir(directorypath):
+            itempath = directorypath + "/" + items
+            if os.path.isfile(directorypath + "/" + items):
+                files.append(i + "/" + items)
+                print(f"{items} is a file")
+            elif os.path.isdir(directorypath + "/" + items):
+                directories.append(i + "/" + items)
+                print(f"{items} is a directory")
+            else:
+                print(f"Could not encrypt {directorypath}/{items}")
+
+print(files)
+print(directories)
+key = 22
